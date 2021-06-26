@@ -28,7 +28,7 @@ jobs:
         with:
           appName: VladSpreys/Sleep-Tracker
           token: ${{secrets.APP_CENTER_TOKEN}}
-          group: Collaborators
+          group: Public
           file: app/build/outputs/apk/debug/app-debug.apk
           debug: false
       - name: Successful Discord notification
@@ -36,12 +36,12 @@ jobs:
         if: ${{ success() }}
         with:
           webhook: ${{ secrets.DISCORD_WEBHOOK }}
-          title: "Application Build"
-          description: "The application was built successfully"
+          description: |
+            "Sleep Tracker ${{github.run_number}} has been released"
+            "[Download](https://install.appcenter.ms/users/vladspreys/apps/sleep-tracker/distribution_groups/public)
       - name: Failed Discord notification
         uses: sarisia/actions-status-discord@v1
         if: ${{ failure() }}
         with:
           webhook: ${{ secrets.DISCORD_WEBHOOK }}
-          title: "Application Build"
           description: "The application build failed"
