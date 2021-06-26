@@ -25,8 +25,15 @@ jobs:
         with:
           expose-version-name: 'true'
           expose-version-code: 'true'
-      - name: Run ktlint
-        run: ./gradlew ktlintCheck
+      - name: Install ktlint
+        run: |
+          curl -sSLO https://github.com/pinterest/ktlint/releases/download/0.41.0/ktlint && chmod a+x ktlint && sudo mv ktlint /usr/local/bin/
+      - name: run ktlint
+        run: |
+          ktlint --reporter=checkstyle,output=build/ktlint-report.xml
+      - uses: yutailang0119/action-ktlint@v1.0.0
+        with:
+          xml_path: build/*.xml
       - name: Build the app
         run: ./gradlew clean assembleDebug
       - name: Upload build to AppCenter
