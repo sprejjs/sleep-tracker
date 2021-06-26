@@ -17,6 +17,7 @@
 package com.example.android.trackmysleepquality.sleeptracker
 
 import android.app.Application
+import android.text.Spanned
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -44,12 +45,30 @@ class SleepTrackerViewModel(
     val navigateToSleepQuality: LiveData<SleepNight>
         get() = _navigateToSleepQuality
 
-    val nightString = Transformations.map(nights) { nights ->
+    private val _showDbClearedMessage = MutableLiveData<Boolean>()
+
+    val showDbClearedMessage: LiveData<Boolean>
+        get() = _showDbClearedMessage
+
+    val nightString: LiveData<Spanned> = Transformations.map(nights) { nights ->
         formatNights(nights, application.resources)
+    }
+
+    val startButtonVisible: LiveData<Boolean> = Transformations.map(tonight) { tonight ->
+        tonight == null
+    }
+
+    val stopButtonVisible: LiveData<Boolean> = Transformations.map(tonight) { tonight ->
+        tonight != null
+    }
+
+    val clearButtonVisible: LiveData<Boolean> = Transformations.map(nights) { nights ->
+        nights.isNotEmpty()
     }
 
     init {
         initialiseTonight()
+        _showDbClearedMessage.value = false
     }
 
     fun onStartTracking() {
@@ -73,11 +92,16 @@ class SleepTrackerViewModel(
         viewModelScope.launch {
             clear()
             tonight.value = null
+            _showDbClearedMessage.value = true
         }
     }
 
     fun doneNavigating() {
         _navigateToSleepQuality.value = null
+    }
+
+    fun doneShowingDbClearedMessage() {
+        _showDbClearedMessage.value = false
     }
 
     private fun initialiseTonight() {
