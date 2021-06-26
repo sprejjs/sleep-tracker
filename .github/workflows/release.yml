@@ -20,3 +20,10 @@ jobs:
           webhook: ${{ secrets.DISCORD_WEBHOOK }}
           title: "Application Build"
           description: "The application was built successfully"
+      - name: Failed Discord notification
+          uses: sarisia/actions-status-discord@v1
+          if: ${{ failure() }}
+          with:
+            webhook: ${{ secrets.DISCORD_WEBHOOK }}
+            title: "Application Build"
+            description: "The application build failed"
