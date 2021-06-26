@@ -12,7 +12,15 @@ jobs:
       - name: Checkout the code
         uses: actions/checkout@v2
       - name: Build the app
-        run: ./gradlew build
+        run: ./gradlew clean assembleDebug
+      - name: Upload build to AppCenter
+        uses: wzieba/AppCenter-Github-Action@v1
+        with:
+          appName: VladSpreys/Sleep-Tracker
+          token: ${{secrets.APP_CENTER_TOKEN}}
+          group: Testers
+          file: app/build/outputs/apk/debug/app-debug-unsigned.apk
+          debug: false
       - name: Successful Discord notification
         uses: sarisia/actions-status-discord@v1
         if: ${{ success() }}
@@ -21,9 +29,9 @@ jobs:
           title: "Application Build"
           description: "The application was built successfully"
       - name: Failed Discord notification
-          uses: sarisia/actions-status-discord@v1
-          if: ${{ failure() }}
-          with:
-            webhook: ${{ secrets.DISCORD_WEBHOOK }}
-            title: "Application Build"
-            description: "The application build failed"
+        uses: sarisia/actions-status-discord@v1
+        if: ${{ failure() }}
+        with:
+          webhook: ${{ secrets.DISCORD_WEBHOOK }}
+          title: "Application Build"
+          description: "The application build failed"
