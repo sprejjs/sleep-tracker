@@ -26,7 +26,7 @@ jobs:
           expose-version-name: 'true'
           expose-version-code: 'true'
       - name: Build the app
-        run: ./gradlew clean assembleDebug
+        run: ./gradle clean assembleDebug
       - name: Upload build to AppCenter
         uses: wzieba/AppCenter-Github-Action@v1
         with:
@@ -40,6 +40,7 @@ jobs:
         if: ${{ success() }}
         with:
           webhook: ${{ secrets.DISCORD_WEBHOOK }}
+          avatar_url: ${{ secrets.DISCORD_AVATAR_URL }}
           description: |
             Sleep Tracker ${{env.ANDROID_VERSION_NAME}} (${{env.ANDROID_VERSION_CODE}}) has been released
             [Download](https://install.appcenter.ms/users/vladspreys/apps/sleep-tracker/distribution_groups/public)
@@ -48,4 +49,6 @@ jobs:
         if: ${{ failure() }}
         with:
           webhook: ${{ secrets.DISCORD_WEBHOOK }}
-          description: "The application build failed"
+          avatar_url: ${{ secrets.DISCORD_AVATAR_URL }}
+          description: |
+            The application build [failed](${{GITHUB_SERVER_URL}}/${{GITHUB_REPOSITORY}}/actions/runs/${{GITHUB_RUN_ID}}).
