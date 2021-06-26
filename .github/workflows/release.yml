@@ -25,6 +25,8 @@ jobs:
         with:
           expose-version-name: 'true'
           expose-version-code: 'true'
+      - name: Run ktlint
+        run: ./gradlew ktlintCheck
       - name: Build the app
         run: ./gradlew clean assembleDebug
       - name: Upload build to AppCenter
@@ -42,8 +44,8 @@ jobs:
           webhook: ${{ secrets.DISCORD_WEBHOOK }}
           avatar_url: ${{ secrets.DISCORD_AVATAR_URL }}
           description: |
-            Sleep Tracker ${{env.ANDROID_VERSION_NAME}} (${{env.ANDROID_VERSION_CODE}}) has been released
-            [Download](https://install.appcenter.ms/users/vladspreys/apps/sleep-tracker/distribution_groups/public)
+            Sleep Tracker ${{env.ANDROID_VERSION_NAME}} (${{env.ANDROID_VERSION_CODE}}) has been released.
+            [Download](${{secrets.APP_CENTER_PUBLIC_URL}})
       - name: Failed Discord notification
         uses: sarisia/actions-status-discord@v1
         if: ${{ failure() }}
@@ -51,5 +53,5 @@ jobs:
           webhook: ${{ secrets.DISCORD_WEBHOOK }}
           avatar_url: ${{ secrets.DISCORD_AVATAR_URL }}
           description: |
-            The application build failed.
+            Sleep Tracker ${{env.ANDROID_VERSION_NAME}} (${{env.ANDROID_VERSION_CODE}}) build failed.
             ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}.
