@@ -20,7 +20,11 @@ jobs:
         with:
           gradlePath: app/build.gradle # or app/build.gradle.kts
           versionCode: ${{github.run_number}}
-          versionName: 1.0.0
+      - name: Expose version name
+        uses: michpohl/android-expose-version-name-action@v1.0.0
+        with:
+          expose-version-name: 'true'
+          expose-version-code: 'true'
       - name: Build the app
         run: ./gradlew clean assembleDebug
       - name: Upload build to AppCenter
@@ -37,8 +41,8 @@ jobs:
         with:
           webhook: ${{ secrets.DISCORD_WEBHOOK }}
           description: |
-            "Sleep Tracker ${{github.run_number}} has been released"
-            "[Download](https://install.appcenter.ms/users/vladspreys/apps/sleep-tracker/distribution_groups/public)
+            Sleep Tracker ${{env.ANDROID_VERSION_NAME}} (${{env.ANDROID_VERSION_CODE}}) has been released
+            [Download](https://install.appcenter.ms/users/vladspreys/apps/sleep-tracker/distribution_groups/public)
       - name: Failed Discord notification
         uses: sarisia/actions-status-discord@v1
         if: ${{ failure() }}
