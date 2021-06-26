@@ -29,7 +29,7 @@ abstract class SleepDatabase : RoomDatabase() {
         @Volatile
         private var INSTANCE: SleepDatabase? = null
 
-        fun getInstance(context: Context) : SleepDatabase {
+        fun getInstance(context: Context): SleepDatabase {
             synchronized(this) {
                 var instance = INSTANCE
 
