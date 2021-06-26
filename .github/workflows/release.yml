@@ -51,4 +51,4 @@ jobs:
           webhook: ${{ secrets.DISCORD_WEBHOOK }}
           avatar_url: ${{ secrets.DISCORD_AVATAR_URL }}
           description: |
-            The application build [failed](${{ env.GITHUB_SERVER_URL }}/${{ env.GITHUB_REPOSITORY }}/actions/runs/${{ env.GITHUB_RUN_ID }}).
+            The application build failed: ${{ env.GITHUB_SERVER_URL }}/${{ env.GITHUB_REPOSITORY }}/actions/runs/${{ env.GITHUB_RUN_ID }}.
