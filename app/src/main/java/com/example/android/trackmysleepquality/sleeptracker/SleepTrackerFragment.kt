@@ -35,6 +35,7 @@ import com.google.android.material.snackbar.Snackbar
  * (Because we have not learned about RecyclerView yet.)
  */
 class SleepTrackerFragment : Fragment() {
+    private val adapter = SleepNightAdapter()
 
     /**
      * Called when the Fragment is ready to display content to the screen.
@@ -88,8 +89,13 @@ class SleepTrackerFragment : Fragment() {
             }
         )
 
+        viewModel.nights.observe(viewLifecycleOwner, { list ->
+            adapter.data = list
+        })
+
         binding.sleepTrackerViewModel = viewModel
         binding.lifecycleOwner = this
+        binding.sleepList.adapter = adapter
 
         return binding.root
     }
