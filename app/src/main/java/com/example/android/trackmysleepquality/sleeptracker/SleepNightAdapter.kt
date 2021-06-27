@@ -45,12 +45,10 @@ class SleepNightAdapter : RecyclerView.Adapter<SleepNightAdapter.ViewHolder>() {
         return ViewHolder(view)
     }
 
-    class ViewHolder(
-        val parent: View,
-    ) : RecyclerView.ViewHolder(parent) {
+    class ViewHolder(parent: View) : RecyclerView.ViewHolder(parent) {
         val qualityImage: ImageView =
-            parent.findViewById<ImageView>(R.id.sleep_item_quality_image_view)
-        val sleepLength: TextView = parent.findViewById<TextView>(R.id.sleep_item_date_text_view)
-        val quality: TextView = parent.findViewById<TextView>(R.id.sleep_item_quality_description)
+            parent.findViewById(R.id.sleep_item_quality_image_view)
+        val sleepLength: TextView = parent.findViewById(R.id.sleep_item_date_text_view)
+        val quality: TextView = parent.findViewById(R.id.sleep_item_quality_description)
     }
 }
