@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
             name="sleep"
             type="com.example.android.trackmysleepquality.database.SleepNight" />
@@ -15,43 +14,28 @@
         android:layout_height="wrap_content">
 
         <ImageView
-            android:id="@+id/sleep_item_quality_image_view"
+            android:id="@+id/quality_image"
             android:layout_width="@dimen/icon_size"
-            android:layout_height="@dimen/icon_size"
-            android:layout_marginVertical="8dp"
+            android:layout_height="60dp"
             android:layout_marginStart="16dp"
-            android:contentDescription="@string/sleep_quality_good"
-            app:sleepImage="@{sleep}"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:contentDescription="Sleep Quality"
-            tools:src="@drawable/ic_sleep_5" />
+            tools:srcCompat="@drawable/ic_sleep_5"
+            app:sleepImage="@{sleep}"
+            tools:ignore="ContentDescription" />
 
         <TextView
-            android:id="@+id/sleep_item_date_text_view"
+            android:id="@+id/quality_string"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="16dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/sleep_item_quality_image_view"
-            app:layout_constraintTop_toTopOf="@id/sleep_item_quality_image_view"
-            app:sleepDurationFormatted="@{sleep}"
-            tools:text="Wednesday" />
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/sleep_item_quality_description"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="16dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/sleep_item_quality_image_view"
-            app:layout_constraintTop_toBottomOf="@id/sleep_item_date_text_view"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:sleepQualityString="@{sleep}"
-            tools:text="Excellent!" />
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="@+id/quality_image"
+            app:layout_constraintStart_toStartOf="@+id/quality_image"
+            app:layout_constraintTop_toBottomOf="@+id/quality_image"
+            app:sleepQualityString="@{sleep}"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

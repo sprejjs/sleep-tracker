@@ -24,6 +24,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.GridLayoutManager
 import com.example.android.trackmysleepquality.R
 import com.example.android.trackmysleepquality.database.SleepDatabase
 import com.example.android.trackmysleepquality.databinding.FragmentSleepTrackerBinding
@@ -35,8 +36,6 @@ import com.google.android.material.snackbar.Snackbar
  * (Because we have not learned about RecyclerView yet.)
  */
 class SleepTrackerFragment : Fragment() {
-    private val adapter = SleepNightAdapter()
-
     /**
      * Called when the Fragment is ready to display content to the screen.
      *
@@ -89,6 +88,10 @@ class SleepTrackerFragment : Fragment() {
             }
         )
 
+        val manager = GridLayoutManager(context, 3)
+        binding.sleepList.layoutManager = manager
+
+        val adapter = SleepNightAdapter()
         viewModel.nights.observe(
             viewLifecycleOwner,
             { list ->
