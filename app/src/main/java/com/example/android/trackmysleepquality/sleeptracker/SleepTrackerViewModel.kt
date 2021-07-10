@@ -126,4 +126,8 @@ class SleepTrackerViewModel(
     private suspend fun clear() {
         database.clear()
     }
+
+    fun onSleepNightClicked(id: Long) {
+        TODO("Not yet implemented")
+    }
 }
