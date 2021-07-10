@@ -21,7 +21,7 @@ buildscript {
         version_core = "1.5.0"
         version_coroutine = "1.4.3"
         version_constraint_layout = "2.1.0-beta02"
-        version_gradle = '4.2.1'
+        version_gradle = '4.2.2'
         version_kotlin = "1.5.20"
         version_lifecycle = "2.3.1"
         version_navigation = '1.0.0'
