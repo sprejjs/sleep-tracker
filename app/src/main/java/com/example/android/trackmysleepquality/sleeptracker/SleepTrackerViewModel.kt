@@ -42,9 +42,9 @@ class SleepTrackerViewModel(
     val navigateToSleepQuality: LiveData<SleepNight>
         get() = _navigateToSleepQuality
 
-    private val _navigateToSleepDetail = MutableLiveData<SleepNight>()
+    private val _navigateToSleepDetail = MutableLiveData<Long>()
 
-    val navigateToSleepDetail: LiveData<SleepNight>
+    val navigateToSleepDetail: LiveData<Long>
         get() = _navigateToSleepDetail
 
     private val _showDbClearedMessage = MutableLiveData<Boolean>()
@@ -133,6 +133,6 @@ class SleepTrackerViewModel(
     }
 
     fun onSleepNightClicked(id: Long) {
-        TODO("Not yet implemented")
+        _navigateToSleepDetail.value = id
     }
 }
