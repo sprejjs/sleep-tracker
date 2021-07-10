@@ -11,15 +11,10 @@ class SleepDetailViewModel(
     private val sleepNightKey: Long = 0L,
     dataSource: SleepDatabaseDao
 ) : ViewModel() {
-
     /**
      * Hold a reference to SleepDatabase via its SleepDatabaseDao.
      */
     val database = dataSource
-
-
-    /**
-     */
 
     private val night = MediatorLiveData<SleepNight>()
 
@@ -58,5 +53,4 @@ class SleepDetailViewModel(
     fun onClose() {
         _navigateToSleepTracker.value = true
     }
-
 }
