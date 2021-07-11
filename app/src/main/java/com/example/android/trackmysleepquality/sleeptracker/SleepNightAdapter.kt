@@ -51,7 +51,7 @@ class SleepNightAdapter(private val clickListener: SleepNightListener) :
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return when(viewType) {
+        return when (viewType) {
             ITEM_VIEW_TYPE_HEADER -> TextViewHolder.from(parent)
             ITEM_VIEW_TYPE_ITEM -> ViewHolder.from(parent)
             else -> throw ClassCastException("Unknown view type $viewType")
@@ -76,7 +76,7 @@ class SleepNightAdapter(private val clickListener: SleepNightListener) :
         }
     }
 
-    class TextViewHolder(view: View): RecyclerView.ViewHolder(view) {
+    class TextViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         companion object {
             fun from(parent: ViewGroup): TextViewHolder {
                 val layoutInflater = LayoutInflater.from(parent.context)
@@ -104,10 +104,10 @@ class SleepNightListener(val clickListener: (sleepId: Long) -> Unit) {
 }
 
 sealed class DataItem {
-    data class SleepNightItem(val sleepNight: SleepNight): DataItem() {
+    data class SleepNightItem(val sleepNight: SleepNight) : DataItem() {
         override val id: Long = sleepNight.nightId
     }
-    object Header: DataItem() {
+    object Header : DataItem() {
         override val id = Long.MIN_VALUE
     }
 
