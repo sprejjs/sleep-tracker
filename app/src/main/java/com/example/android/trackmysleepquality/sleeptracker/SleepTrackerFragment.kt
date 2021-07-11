@@ -74,6 +74,18 @@ class SleepTrackerFragment : Fragment() {
             }
         )
 
+        viewModel.navigateToSleepDetail.observe(
+            viewLifecycleOwner,
+            { id ->
+                id?.let {
+                    findNavController().navigate(
+                        SleepTrackerFragmentDirections.actionSleepTrackerFragmentToSleepDetailFragment(id)
+                    )
+                    viewModel.onSleepDetailNavigated()
+                }
+            }
+        )
+
         viewModel.showDbClearedMessage.observe(
             viewLifecycleOwner,
             { show ->
