@@ -101,7 +101,7 @@ class SleepTrackerFragment : Fragment() {
         )
 
         val manager = GridLayoutManager(context, 3)
-        manager.spanSizeLookup = object: GridLayoutManager.SpanSizeLookup() {
+        manager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
             override fun getSpanSize(position: Int) = when (position) {
                 0 -> 3
                 else -> 1
